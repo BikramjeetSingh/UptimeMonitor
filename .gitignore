@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+
+# Terraform
+terraform/.editorconfig
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform.lock.hcl
+
+
+
+# packaging
+uptime_lambda.zip
+package
+
+
+# Mac/IDE
+.DS_Store
+.vscode/
+.idea/
