@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_event_rule" "schedule" {
     name = "uptime-monitor-rule"
-    schedule_expression = "rate(5 minutes)"
+    schedule_expression = "rate(15 minutes)"
 }
 
 

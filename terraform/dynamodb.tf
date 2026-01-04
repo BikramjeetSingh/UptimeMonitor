@@ -16,4 +16,9 @@ resource "aws_dynamodb_table" "uptime" {
     tags = {
         Project = "uptime-monitor"
     }
+
+    ttl {
+        attribute_name = "expires_at"
+        enabled        = true
+    }
 }

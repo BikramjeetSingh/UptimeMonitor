@@ -15,5 +15,3 @@ Copy-Item lambda/lambda_function.py package/
 Compress-Archive -Path package\* -DestinationPath uptime_lambda.zip
 
 Write-Host "Created uptime_lambda.zip"
-Write-Host "Deploy with:"
-Write-Host "aws lambda update-function-code --function-name uptime-monitor --zip-file fileb://uptime_lambda.zip"

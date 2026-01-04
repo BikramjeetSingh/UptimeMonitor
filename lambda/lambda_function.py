@@ -15,6 +15,7 @@ cloudwatch = boto3.client("cloudwatch")
 
 # DynamoDB table name (env var recommended)
 TABLE_NAME = os.environ.get("UPTIME_TABLE", "UptimeMonitor")
+TTL_DAYS = 1
 
 # List of URLs to monitor from AWS SSM Parameter Store
 # Expected: parameter name in env var UPTIME_SSM_PARAM (StringList or comma-separated string)
@@ -112,13 +113,15 @@ def lambda_handler(event, context):
             if result["latency"] is not None
             else Decimal("-1")
         )
+        expires_at = int(time.time()) + TTL_DAYS * 24 * 60 * 60
 
         dynamo_item = {
             "url": result["url"],
             "timestamp": result["timestamp"],
             "is_up": int(result["is_up"]),
             "latency_ms": latency_value,
-            "status_code": result.get("status_code")
+            "status_code": result.get("status_code"),
+            "expires_at": expires_at
         }
         save_to_dynamodb(TABLE_NAME, dynamo_item)
 
